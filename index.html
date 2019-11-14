@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title> English Alphabet recognition Game </title>
+  <link rel="stylesheet" href="/assets/style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="container">
+    <div>
+        <label>Write Below </label>
+        <canvas id="input_canvas"></canvas>
+    </div>
+    <div style="align-self: center">
+        <div id="loader"></div>
+        <button id="button_recognize" onclick="StartRecognize()">
+            Recognize
+        </button>
+        <button id="button_remove">
+            Remove
+        </button>
+        <label id="loading_label">Please wait...</label>
+    </div>
+    <div>
+        <label>Results:</label>
+        <div id="results_block"></div>
+    </div>
+</div>
+<!-- partial -->
+  <script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'></script>
+  <script src='/assets/jquery-3.4.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.0/paper-core.js'></script><script  src="/assets/script.js"></script>
+
+</body>
+</html>
