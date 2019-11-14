@@ -26,6 +26,23 @@ window.onload = () => {
         document.querySelector("#results_block").innerHTML = '';
     }
 }
+
+// Fucntion print a rendom alphabet
+function randomAlphabet(length) {
+   var result           = '';
+   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
+var alphabet = (randomAlphabet(1));
+
+$('#random_alphabet_block').html(alphabet);
+
+
+
 let StartRecognize = () => {
     document.getElementById('button_recognize').style.display = "none";
     document.getElementById('button_remove').style.display = "none";
@@ -42,14 +59,17 @@ let StartRecognize = () => {
 
             // custom query
             var obj = data.text;
-                value = 'A';
+                value = alphabet;
 
+                // Check if is that the alphabet matching OR not
             if (obj.match(value)) {
                 console.log(value);
+                $('#random_alphabet_block').html('Success');
             } else {
                 console.log('???');
+                $('#random_alphabet_block').html('Write Again');
             }
-        
+
 
 
 
@@ -59,5 +79,5 @@ let StartRecognize = () => {
 
 // Check if the result block udpated
 $('#results_block').bind('DOMSubtreeModified',function(event) {
-    
+
 });
