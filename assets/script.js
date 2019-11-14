@@ -39,10 +39,25 @@ let StartRecognize = () => {
             document.getElementById('button_remove').style.display = "block";
             document.getElementById('loading_label').style.display = "none";
             document.getElementById('loader').style.display = "none";
-             console.log(data.text);
-        })
+
+            // custom query
+            var obj = data.text;
+                value = 'A';
+
+            if (obj.match(value)) {
+                console.log(value);
+            } else {
+                console.log('???');
+            }
+        
+
+
+
+        }) // end of then function
 }
 
-// $(document).ready(function(){
 
-// })
+// Check if the result block udpated
+$('#results_block').bind('DOMSubtreeModified',function(event) {
+    
+});
