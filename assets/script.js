@@ -21,11 +21,15 @@ window.onload = () => {
         path.add(event.point);
     }
 
-    document.getElementById('button_remove').onclick = () => {
-        paper.project.activeLayer.removeChildren();
-        document.querySelector("#results_block").innerHTML = '';
-    }
-}
+    // Remove the drawing text for right again
+    $('#button_remove').click(function(){
+       gameLoad();
+    });
+    $('#button_play_again').click(function(){
+        gameLoadAgain();
+    });
+
+} 
 
 // Fucntion print a rendom alphabet
 function randomAlphabet(length) {
@@ -36,24 +40,68 @@ function randomAlphabet(length) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
    }
    return result;
-}
-var alphabet = (randomAlphabet(1));
 
-$('#random_alphabet_block').html(alphabet);
+}
+
+
+    
+ 
+    
+// defining the random alphabet length
+// printing the alphabet on screen
+function say () {
+
+    alphabet = (randomAlphabet(1));
+    console.log(alphabet);
+    $('#random_alphabet_block').html(alphabet);
+}
+say();
+
+
+// remove the drawing text
+// recall the say() function
+// make the game replayable
+function gameLoadAgain () {
+     paper.project.activeLayer.removeChildren();
+    document.querySelector("#results_block").innerHTML = '';
+    say();
+    $('#button_play_again').css('visibility', 'hidden');
+    $('#button_recognize').removeAttr('disabled');
+    $('#button_remove').removeAttr('disabled');
+}
+// remove the drawing text
+// Give to the user an other chance
+function gameLoad() {
+    paper.project.activeLayer.removeChildren();
+    document.querySelector("#results_block").innerHTML = '';
+    $('#random_alphabet_block').html(alphabet);
+    $('#button_recognize').removeAttr('disabled');
+    
+}
+// if case of successfull match
+function success() {
+    $('#random_alphabet_block').html('Success ... !!');
+    $('#button_play_again').css('visibility', 'visible');
+    $('#button_recognize').attr('disabled', 'disable');
+    $('#button_remove').attr('disabled', 'disable');
+}
 
 
 
 let StartRecognize = () => {
-    document.getElementById('button_recognize').style.display = "none";
-    document.getElementById('button_remove').style.display = "none";
+    $('#button_recognize').css('visibility', 'hidden');
+    $('#button_remove').css('visibility', 'hidden');
+    $('#button_play_again').css('visibility', 'hidden');
     document.getElementById('loader').style.display = "block";
     document.getElementById('loading_label').style.display = "block";
     document.querySelector("#results_block").innerHTML = '';
     Tesseract.recognize(document.getElementById('input_canvas').getContext('2d'))
         .then(function (data) {
+
             document.getElementById('results_block').innerText = data.text;
-            document.getElementById('button_recognize').style.display = "block";
-            document.getElementById('button_remove').style.display = "block";
+            $('#button_recognize').css('visibility', 'visible');
+            $('#button_remove').css('visibility', 'visible');
+
             document.getElementById('loading_label').style.display = "none";
             document.getElementById('loader').style.display = "none";
 
@@ -64,14 +112,15 @@ let StartRecognize = () => {
                 // Check if is that the alphabet matching OR not
             if (obj.match(value)) {
                 console.log(value);
-                $('#random_alphabet_block').html('Success');
+                success();
+
             } else {
                 console.log('???');
-                $('#random_alphabet_block').html('Write Again');
+                $('#random_alphabet_block').html('Write Again' + ' ' + value );
+                $('#button_recognize').attr('disabled', 'disable');
+
+                // gameLoad();
             }
-
-
-
 
         }) // end of then function
 }
