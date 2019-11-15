@@ -4,6 +4,19 @@
   <meta charset="UTF-8">
   <title> English Alphabet recognition Game </title>
   <link rel="stylesheet" href="/assets/style.css">
+<style type="text/css">
+   #random_alphabet_block {
+    font-size: 24px;
+    margin-bottom: 20px;
+   }
+  #random_alphabet_block span {
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+
+</style>
+
 
 </head>
 <body>
@@ -14,12 +27,16 @@
         <canvas id="input_canvas"></canvas>
     </div>
     <div style="align-self: center">
-        <h2 id="random_alphabet_block"> Hello World</h2>
+        <div id="random_alphabet_block"> Hello World</div>
+        <label id="minutes">00</label>:<label id="seconds">00</label> <br /><!-- timer block --->
         <div id="loader"></div>
-        <button id="button_recognize" onclick="StartRecognize()">
+        <button id="button_game_start">
+            Start It
+        </button>
+        <button id="button_recognize" onclick="StartRecognize()"  disabled="disable">
             Recognize
         </button>
-        <button id="button_remove">
+        <button id="button_remove" disabled="disable">
             Remove
         </button>
         <button id="button_play_again" style="visibility: hidden;">
@@ -27,10 +44,10 @@
         </button>
         <label id="loading_label">Please wait...</label>
     </div>
-    <div>
+<!--     <div>
         <label>Results:</label>
         <div id="results_block"></div>
-    </div>
+    </div> -->
 </div>
 <!-- partial -->
   <script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'></script>
