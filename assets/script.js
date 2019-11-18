@@ -92,9 +92,10 @@ function pad(val) {
 
 function startGameButton() {
     TimerId = setInterval(setTime, 1000);
-    $('#button_recognize').removeAttr('disabled');
-    $('#button_remove').removeAttr('disabled');
-    $('#button_game_start').attr('disabled', 'disable');
+    $('#button_recognize').removeAttr('disabled').removeClass('button-disable').addClass('button-enable');
+    $('#button_remove').removeAttr('disabled').removeClass('button-disable').addClass('button-enable');
+    $('#button_game_start').attr('disabled', 'disable').removeClass('button-enable').addClass('button-disable');
+    $('#input_canvas').css('pointer-events', 'auto');
 
 }
 
@@ -105,32 +106,25 @@ function startGameButton() {
 // recall the say() function
 // make the game replayable
 // set the timer 00 again
+// Disable the canvas (to get click on start button)
 function gameLoadAgain () {
      paper.project.activeLayer.removeChildren();
-    // document.querySelector("#results_block").innerHTML = '';
     say();
     $('#button_play_again').css('visibility', 'hidden');
-    // $('#button_recognize').removeAttr('disabled');
-    // $('#button_remove').removeAttr('disabled');
-    $('#button_game_start').removeAttr('disabled');
-    // $('#button_recognize').removeAttr('disabled');
-    // $('#button_remove').removeAttr('disabled');
+    $('#button_game_start').removeAttr('disabled').removeClass('button-disable').addClass('button-enable');
     TimerId = setInterval(setTime, 1000);
     clearInterval(TimerId);
     secondsLabel.innerHTML = "00";
     minutesLabel.innerHTML = "00";
     totalSeconds = 0;
-
-
-
-
-
+    $('#input_canvas').css('pointer-events', 'none');
+    
     console.log('GameLoadAGain function --->' + minutes + ' : ' + seconds)
 }
 // remove the drawing text
 // Give to the user an other chance
 // not stop the timer
-function gameLoad() {
+function gameLoad() {// in the case of wrong attempt
     paper.project.activeLayer.removeChildren();
     // document.querySelector("#results_block").innerHTML = '';
     $('#random_alphabet_block').html(alphabet);
@@ -142,9 +136,10 @@ function gameLoad() {
 // stop the timer and print total time
 function success() {
     $('#random_alphabet_block').html('Success ... !! Your time '+ minutes + ' : ' + seconds);
-    $('#button_play_again').css('visibility', 'visible');
-    $('#button_recognize').attr('disabled', 'disable');
-    $('#button_remove').attr('disabled', 'disable');
+    $('#button_play_again').css('visibility', 'visible').removeClass('button-disable').addClass('button-enable');
+    $('#button_recognize').attr('disabled', 'disable').removeClass('button-enable').addClass('button-disable');
+    $('#button_remove').attr('disabled', 'disable').removeClass('button-enable').addClass('button-disable');
+    $('#input_canvas').css('pointer-events', 'none');// disabling the convas 
     clearInterval(TimerId);
     console.log('Success function--> '+ minutes + ' : ' + seconds);
 
@@ -198,3 +193,6 @@ $('#input_canvas').bind('DOMSubtreeModified',function(event) {
 
 
 });
+
+
+// $("#input_canvas").attr("disabled", "disabled").off('click');

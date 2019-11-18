@@ -13,7 +13,21 @@
     font-size: 30px;
     font-weight: bold;
   }
-
+  button {
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+  }
+  .button-disable {
+    background-color: #2C3E50;
+    box-shadow: 0px 0px 0px;
+  }
+  .button-enable {
+    background-color: #27AE60;
+    box-shadow: 0px 15px 20px #929eaa;
+  }
 
 </style>
 
@@ -24,19 +38,21 @@
 <div class="container">
     <div>
         <label>Write Below </label>
-        <canvas id="input_canvas"></canvas>
+        <div class="convas-main" >
+          <canvas id="input_canvas" style="pointer-events: none;"></canvas>
+        </div>
     </div>
     <div style="align-self: center">
         <div id="random_alphabet_block"> Hello World</div>
         <label id="minutes">00</label>:<label id="seconds">00</label> <br /><!-- timer block --->
         <div id="loader"></div>
-        <button id="button_game_start">
+        <button id="button_game_start" class="button-enable">
             Start It
         </button>
-        <button id="button_recognize" onclick="StartRecognize()"  disabled="disable">
+        <button id="button_recognize" onclick="StartRecognize()"  disabled="disable" class="button-disable">
             Recognize
         </button>
-        <button id="button_remove" disabled="disable">
+        <button id="button_remove" disabled="disable" class="button-disable">
             Remove
         </button>
         <button id="button_play_again" style="visibility: hidden;">
